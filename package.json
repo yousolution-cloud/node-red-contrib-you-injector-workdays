@@ -1,0 +1,35 @@
+{
+  "name": "@yousolution/node-red-contrib-you-injector-workdays",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "author": "Alessio Pellizzaro <alessio.pellizzaro@innotech.email>",
+  "license": "MPL-2.0",
+  "node-red": {
+    "version": ">=2.0.0",
+    "nodes": {
+      "WorkDaysInjector": "nodes/youInjector.js"
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node-red-node-test-helper": "^0.2.2",
+    "node-red": "^3.0.2",
+    "node-red-node-test-helper": "^0.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.5.1",
+    "cronosjs": "^1.7.1",
+    "lodash": "^4.17.21",
+    "luxon": "^3.4.3",
+    "rrule": "^2.7.2"
+  }
+}

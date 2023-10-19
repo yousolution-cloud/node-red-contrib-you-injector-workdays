@@ -1,0 +1,779 @@
+<script type="text/html" data-template-name="WorkDaysInjector">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span>Name</span></label>
+        <input type="text" id="node-input-name">
+    </div>
+    <hr />
+    <h5>Setup for select workday of send Msg</h5>
+    <div class="form-row" id="node-numberOfWorkDay">
+        <label for="node-input-numberOfWorkDay"><i class="fa fa-briefcase"></i> <span>Work Day Number</span></label>
+        <input type="text" id="node-input-numberOfWorkDay" placeholder="1" style="width:45px; height:28px;">&nbsp;
+        <span></span>
+    </div>
+    <div class="form-row" id="node-typeTime">
+        <label for="node-input-typeTime"><i class="fa fa-briefcase"></i> <span>WorkDays of</span></label>
+        <input type="text" id="node-input-typeTime">
+    </div>
+    <div class="form-row" id="WorkDaysInjector-nation">
+        <label for="node-input-nation"><i class="fa fa-briefcase"></i> <span>Nation</span>&nbsp;</label>
+        <input type="text" id="node-input-nation" placeholder="IT" style="width:45px; height:28px;">
+        <span></span>
+    </div>
+    <hr />
+    <h5>Setup for check if workday</h5>
+    <div class="form-row">
+        <label for=""><i class="fa fa-repeat"></i> <span>repeat</span></label>
+        <select id="WorkDaysInjector-time-type-select">
+            <option value="none">none</option>
+            <option value="interval">interval</option>
+            <option value="interval-time">interval-time</option>
+            <option value="time">time</option>
+        </select>
+        <input type="hidden" id="node-input-repeat">
+        <input type="hidden" id="node-input-crontab">
+    </div>
+
+    <div class="form-row WorkDaysInjector-time-row hidden" id="WorkDaysInjector-time-row-interval">
+        <span>every</span>
+        <input id="WorkDaysInjector-time-interval-count" class="WorkDaysInjector-time-count" value="1"></input>
+        <select style="width:100px" id="WorkDaysInjector-time-interval-units">
+            <option value="s" >seconds</option>
+            <option value="m">minutes</option>
+            <option value="h">hours</option>
+        </select>
+        <br/>
+    </div>
+
+    <div class="form-row WorkDaysInjector-time-row hidden" id="WorkDaysInjector-time-row-interval-time">
+        <span>every</span> <select style="width:90px; margin-left:20px;" id="WorkDaysInjector-time-interval-time-units" class="WorkDaysInjector-time-int-count" value="1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="0">60</option>
+        </select> <span >minutes</span><br/>
+        <span>between</span> <select id="WorkDaysInjector-time-interval-time-start" class="WorkDaysInjector-time-times"></select>
+        <span>And</span> <select id="WorkDaysInjector-time-interval-time-end" class="WorkDaysInjector-time-times"></select><br/>
+        <div id="WorkDaysInjector-time-interval-time-days" class="WorkDaysInjector-time-days" style="margin-top:5px">
+            <div style="display:inline-block; vertical-align:top; margin-right:5px;">on</div>
+            <div style="display:inline-block;">
+                <div>
+                    <label><input type='checkbox' checked value='1'/> <span data-i18n="WorkDaysInjector.days.0">Monday</span></label>
+                    <label><input type='checkbox' checked value='2'/> <span data-i18n="WorkDaysInjector.days.1">Tuesday</span></label>
+                    <label><input type='checkbox' checked value='3'/> <span data-i18n="WorkDaysInjector.days.2">Wendnesday</span></label>
+                </div>
+                <div>
+                    <label><input type='checkbox' checked value='4'/> <span data-i18n="WorkDaysInjector.days.3">Thursday</span></label>
+                    <label><input type='checkbox' checked value='5'/> <span data-i18n="WorkDaysInjector.days.4">Friday</span></label>
+                    <label><input type='checkbox' checked value='6'/> <span data-i18n="WorkDaysInjector.days.5">Saturday</span></label>
+                </div>
+                <div>
+                    <label><input type='checkbox' checked value='0'/> <span data-i18n="WorkDaysInjector.days.6">Sunday</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row WorkDaysInjector-time-row hidden" id="WorkDaysInjector-time-row-time">
+        <span data-i18n="WorkDaysInjector.at">At</span> <input type="text" id="WorkDaysInjector-time-time" value="12:00"></input><br/>
+        <div id="WorkDaysInjector-time-time-days" class="WorkDaysInjector-time-days">
+            <div style="display:inline-block; vertical-align:top; margin-right:5px;" data-i18n="WorkDaysInjector.on"></div>
+            <div style="display:inline-block;">
+                <div>
+                    <label><input type='checkbox' checked value='1'/> <span data-i18n="WorkDaysInjector.days.0">Monday</span></label>
+                    <label><input type='checkbox' checked value='2'/> <span data-i18n="WorkDaysInjector.days.1">Tuesday</span></label>
+                    <label><input type='checkbox' checked value='3'/> <span data-i18n="WorkDaysInjector.days.2">Wendnesday</span></label>
+                </div>
+                <div>
+                    <label><input type='checkbox' checked value='4'/> <span data-i18n="WorkDaysInjector.days.3">Thursday</span></label>
+                    <label><input type='checkbox' checked value='5'/> <span data-i18n="WorkDaysInjector.days.4">Friday</span></label>
+                    <label><input type='checkbox' checked value='6'/> <span data-i18n="WorkDaysInjector.days.5">Saturday</span></label>
+                </div>
+                <div>
+                    <label><input type='checkbox' checked value='0'/> <span data-i18n="WorkDaysInjector.days.6">Sunday</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+<style>
+    .WorkDaysInjector-time-row {
+        padding-left: 110px;
+    }
+    .WorkDaysInjector-time-row:not(#WorkDaysInjector-time-row-interval) select {
+        margin: 3px 0;
+    }
+    .WorkDaysInjector-time-days label {
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        vertical-align: baseline;
+        width: 100px;
+    }
+    .WorkDaysInjector-time-days input {
+        width: auto !important;
+        vertical-align: baseline !important;
+    }
+    .WorkDaysInjector-time-times {
+        width: 90px !important;
+    }
+    #WorkDaysInjector-time-time {
+        width: 75px;
+        margin-left: 8px;
+        margin-bottom: 8px;
+    }
+    .WorkDaysInjector-time-count {
+        padding-left: 3px !important;
+        width: 80px !important;
+    }
+</style>
+
+<script type="text/javascript">
+(function() {
+
+    function resizeDialog(size) {
+        size = size || { height: $(".red-ui-tray-content form").height() }
+        var rows = $("#dialog-form>div:not(.node-input-property-container-row):visible");
+        var height = size.height;
+        for (var i=0; i<rows.length; i++) {
+            height -= $(rows[i]).outerHeight(true);
+        }
+        var editorRow = $("#dialog-form>div.node-input-property-container-row");
+        height -= (parseInt(editorRow.css("marginTop"))+parseInt(editorRow.css("marginBottom")));
+        height += 16;
+        $("#node-input-property-container").editableList('height',height);
+    }
+    /** Retrieve editableList items (refactored for re-use in the form WorkDaysInjector button)*/
+    function getProps(el, legacy) {
+        var result = {
+            props: [],
+            result: "YOU_INJCT"
+        }
+        el.each(function(i) {
+            var prop = $(this);
+            var p = {
+                p:prop.find(".node-input-prop-property-name").typedInput('value')
+            };
+            if (p.p) {
+                p.v = prop.find(".node-input-prop-property-value").typedInput('value');
+                p.vt = prop.find(".node-input-prop-property-value").typedInput('type');
+                if(legacy) {
+                    if (p.p === "payload") { // save payload to old "legacy" property
+                        result.payloadType = p.vt;
+                        result.payload = p.v;
+                        delete p.v;
+                        delete p.vt;
+                    } else if (p.p === "topic" && p.vt === "str") {
+                        result.topic = p.v;
+                        delete p.v;
+                    }
+                }
+                result.props.push(p);
+            }
+        });
+        return result;
+    }
+    /** Perform WorkDaysInjector, optionally sending a custom msg (refactored for re-use in the form WorkDaysInjector button)*/
+    function doWorkDaysInjector(node) {
+        var label = this.node
+        $.ajax({
+            url: "workInjector/" + node.id,
+            type: "POST",
+            data: JSON.stringify({
+                topic : "WorkDays",
+                WorkDays :true,
+                payload : new Date().getTime(),
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (resp) {
+                console.log(resp);
+                RED.notify(node._("inject.success", { label: label }), { type: "success", id: node.id, timeout: 2000 });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status == 404) {
+                    RED.notify(node._("common.notification.error", { message: node._("common.notification.errors.not-deployed") }), "error");
+                } else if (jqXHR.status == 500) {
+                    RED.notify(node._("common.notification.error", { message: node._("WorkDaysInjector.errors.failed") }), "error");
+                } else if (jqXHR.status == 0) {
+                    RED.notify(node._("common.notification.error", { message: node._("common.notification.errors.no-response") }), "error");
+                } else {
+                    RED.notify(node._("common.notification.error", { message: node._("common.notification.errors.unexpected", { status: jqXHR.status, message: textStatus }) }), "error");
+                }
+            }
+        });
+    }
+    RED.nodes.registerType('WorkDaysInjector',{  
+        category: 'tools',
+        color:"#a6bbcf",
+        defaults: {
+            name: {value:""},
+            props:{
+                value:[{p:"payload"},{p:"topic",vt:"str"}], 
+                validate:function(v, opt) {
+                    if (!v || v.length === 0) { return true }
+                    for (var i=0;i<v.length;i++) {
+                        if (/msg|flow|global/.test(v[i].vt)) {
+                            if (!RED.utils.validatePropertyExpression(v[i].v)) {
+                                return RED._("node-red:WorkDaysInjector.errors.invalid-prop", { prop: 'msg.'+v[i].p, error: v[i].v });
+                            }
+                        } else if (v[i].vt === "jsonata") {
+                            try{ jsonata(v[i].v); }
+                            catch(e){
+                                return RED._("node-red:WorkDaysInjector.errors.invalid-jsonata", { prop: 'msg.'+v[i].p, error: e.message });
+                            }
+                        } else if (v[i].vt === "json") {
+                            try{ JSON.parse(v[i].v); }
+                            catch(e){
+                                return RED._("node-red:WorkDaysInjector.errors.invalid-json", { prop: 'msg.'+v[i].p, error: e.message });
+                            }
+                        } else if (v[i].vt === "num"){
+                            if (!/^[+-]?[0-9]*\.?[0-9]*([eE][-+]?[0-9]+)?$/.test(v[i].v)) {
+                                return RED._("node-red:WorkDaysInjector.errors.invalid-prop", { prop: 'msg.'+v[i].p, error: v[i].v });
+                            }
+                        }
+                    }
+                    return true;
+                }
+            },
+            repeat: {
+                value:"", validate: function(v, opt) {
+                    if ((v === "") ||
+                        (RED.validators.number(v) &&
+                         (v >= 0) && (v <= 2147483))) {
+                        return true;
+                    }
+                    return RED._("node-red:WorkDaysInjector.errors.invalid-repeat");
+                }
+            },
+            crontab: {value:""},
+            once: {value:false},
+            onceDelay: {value:0.1},
+            topic: {value:""},
+            numberOfWorkDay : { value : 1},
+            typeTime : { value : ''}, 
+            nation: {value : 'IT'},
+            payload: {value:"", validate: RED.validators.typedInput("payloadType", false) },
+            payloadType: {value:"date"},
+        },
+        sett : {
+            typeTime : { type : "string"},
+        },
+        icon: "launch_you.svg",
+        inputs:0,
+        outputs:1,
+        outputLabels: function(index) {
+            var lab = '';
+            // if only payload and topic - display payload type
+            // if only one property - show it's type
+            // if more than one property (other than payload and topic) - show "x properties" where x is the number of properties.
+            // this.props will not be an array for legacy WorkDaysInjector nodes until they are re-deployed
+            //
+            var props = this.props;
+            if (!Array.isArray(props)) {
+                props = [
+                    { p:"payload", v: this.payload, vt: this.payloadType },
+                    { p:"topic", v: this.topic, vt: "str" }
+                ]
+            }
+            if (props) {
+                for (var i=0,l=props.length; i<l; i++) {
+                    if (i > 0) lab += "\n";
+                    if (i === 5) {
+                        lab += "... +"+(props.length-5);
+                        break;
+                    }
+                    lab += props[i].p+": ";
+
+                    var propType = props[i].p === "payload"? this.payloadType : props[i].vt;
+                    if (propType === "json") {
+                        try {
+                            var parsedProp = JSON.parse(props[i].p === "payload"? this.payload : props[i].v);
+                            propType = typeof parsedProp;
+                            if (propType === "object" && Array.isArray(parsedProp)) {
+                                propType = "Array";
+                            }
+                        } catch(e) {
+                            propType = "invalid";
+                        }
+                    }
+                    lab += this._(""+propType);
+                }
+            }
+            return lab;
+        },
+        label : `WorkDaysInjector ${ this.name }`,
+        //     var suffix = "";
+        //     // if fire once then add small indication
+        //     if (this.once) {
+        //         suffix = " ¹";
+        //     }
+        //     // but replace with repeat one if set to repeat
+        //     if ((this.repeat && this.repeat != 0) || this.crontab) {
+        //         suffix = " ↻";
+        //     }
+        //     if (this.name) {
+        //         return this.name+suffix;
+        //     }
+        //     var payload = "";
+        //     var payloadType = "str";
+        //     var topic = "";
+        //     if (customProps) {
+        //         for (var i=0;i<customProps.length;i++) {
+        //             if (customProps[i].p === "payload") {
+        //                 payload = customProps[i].v;
+        //                 payloadType = customProps[i].vt;
+        //             } else if (customProps[i].p === "topic") {
+        //                 topic = customProps[i].v;
+        //             }
+        //         }
+        //     } else {
+        //         payload = this.payload || "";
+        //         payloadType = this.payloadType || "str";
+        //         topic = this.topic || "";
+        //     }
+        //     if (payloadType === "string" ||
+        //             payloadType === "str" ||
+        //             payloadType === "num" ||
+        //             payloadType === "bool" ||
+        //             payloadType === "json") {
+        //         if ((topic !== "") && ((topic.length + payload.length) <= 32)) {
+        //             return topic + ":" + payload+suffix;
+        //         } else if (payload.length > 0 && payload.length < 24) {
+        //             return payload+suffix;
+        //         } else {
+        //             return this._("WorkDaysInjector.WorkDaysInjector")+suffix;
+        //         }
+        //     } else if (payloadType === 'date' || payloadType === 'bin' || payloadType === 'env') {
+        //         if ((topic !== "") && (topic.length <= 16)) {
+        //             return topic + ":" + this._('WorkDaysInjector.label.'+payloadType)+suffix;
+        //         } else {
+        //             return this._('WorkDaysInjector.label.'+payloadType)+suffix;
+        //         }
+        //     } else if (payloadType === 'flow' || payloadType === 'global') {
+        //         var key = RED.utils.parseContextKey(payload);
+        //         return payloadType+"."+key.key+suffix;
+        //     } else {
+        //         return this._("WorkDaysInjector.WorkDaysInjector")+suffix;
+        //     }
+        // },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            var node = this;
+            var payloadType = node.payloadType;
+
+            if (node.payloadType == null) {
+                if (node.payload == "") {
+                    payloadType = "date";
+                } else {
+                    payloadType = "str";
+                }
+            } else if (node.payloadType === 'string' || node.payloadType === 'none') {
+                payloadType = "str";
+            }
+            $("#node-input-nation").typedInput({
+                type : "string",
+                types: [{
+                    value: "nation",
+                    default:"IT",
+                }]
+            });
+
+            $("#node-input-typeTime").typedInput({type:"string", types:[{
+                value: "typeTime",
+                default:"MONTH",
+                options: [
+                    { value: "0", label: "YEAR"},
+                    { value: "1", label: "MONTH"},
+                    { value: "2", label: "WEEK"},
+                    { value: "3", label: "DAY"},
+                ]
+            }]});
+
+            $("#WorkDaysInjector-time-type-select").on("change", function() {
+                $("#node-input-crontab").val('');
+                var id = $("#WorkDaysInjector-time-type-select").val();
+                $(".WorkDaysInjector-time-row").hide();
+                $("#WorkDaysInjector-time-row-"+id).show();
+
+                // Scroll down
+                var scrollDiv = $("#dialog-form").parent();
+                scrollDiv.scrollTop(scrollDiv.prop('scrollHeight'));
+                resizeDialog();
+            });
+
+            $("#node-input-once").on("change", function() {
+                $("#node-input-onceDelay").attr('disabled', !$("#node-input-once").prop('checked'));
+            })
+
+            $(".WorkDaysInjector-time-times").each(function() {
+                for (var i=0; i<24; i++) {
+                    var l = (i<10?"0":"")+i+":00";
+                    $(this).append($("<option></option>").val(i).text(l));
+                }
+            });
+            $("<option></option>").val(24).text("00:00").appendTo("#WorkDaysInjector-time-interval-time-end");
+            $("#WorkDaysInjector-time-interval-time-start").on("change", function() {
+                var start = Number($("#WorkDaysInjector-time-interval-time-start").val());
+                var end = Number($("#WorkDaysInjector-time-interval-time-end").val());
+                $("#WorkDaysInjector-time-interval-time-end option").remove();
+                for (var i=start+1; i<25; i++) {
+                    var l = (i<10?"0":"")+i+":00";
+                    if (i==24) {
+                        l = "00:00";
+                    }
+                    var opt = $("<option></option>").val(i).text(l).appendTo("#WorkDaysInjector-time-interval-time-end");
+                    if (i === end) {
+                        opt.attr("selected","selected");
+                    }
+                }
+            });
+
+            $(".WorkDaysInjector-time-count").spinner({
+                //max:60,
+                min:1
+            });
+
+            var repeattype = "none";
+            if (node.repeat != "" && node.repeat != 0) {
+                repeattype = "interval";
+                var r = "s";
+                var c = node.repeat;
+                if (node.repeat % 60 === 0) { r = "m"; c = c/60; }
+                if (node.repeat % 1440 === 0) { r = "h"; c = c/60; }
+                $("#WorkDaysInjector-time-interval-count").val(c);
+                $("#WorkDaysInjector-time-interval-units").val(r);
+                $("#WorkDaysInjector-time-interval-days").prop("disabled","disabled");
+            } else if (node.crontab) {
+                var cronparts = node.crontab.split(" ");
+                var days = cronparts[4];
+                if (!isNaN(cronparts[0]) && !isNaN(cronparts[1])) {
+                    repeattype = "time";
+                    // Fixed time
+                    var time = cronparts[1]+":"+cronparts[0];
+                    $("#WorkDaysInjector-time-time").val(time);
+                    $("#WorkDaysInjector-time-type-select").val("s");
+                    if (days == "*") {
+                        $("#WorkDaysInjector-time-time-days input[type=checkbox]").prop("checked",true);
+                    } else {
+                        $("#WorkDaysInjector-time-time-days input[type=checkbox]").removeAttr("checked");
+                        days.split(",").forEach(function(v) {
+                            $("#WorkDaysInjector-time-time-days [value=" + v + "]").prop("checked", true);
+                        });
+                    }
+                } else {
+                    repeattype = "interval-time";
+                    // interval - time period
+                    var minutes = cronparts[0].slice(2);
+                    if (minutes === "") { minutes = "0"; }
+                    $("#WorkDaysInjector-time-interval-time-units").val(minutes);
+                    if (days == "*") {
+                        $("#WorkDaysInjector-time-interval-time-days input[type=checkbox]").prop("checked",true);
+                    } else {
+                        $("#WorkDaysInjector-time-interval-time-days input[type=checkbox]").removeAttr("checked");
+                        days.split(",").forEach(function(v) {
+                            $("#WorkDaysInjector-time-interval-time-days [value=" + v + "]").prop("checked", true);
+                        });
+                    }
+                    var time = cronparts[1];
+                    var timeparts = time.split(",");
+                    var start;
+                    var end;
+                    if (timeparts.length == 1) {
+                        // 0 or 0-10
+                        var hours = timeparts[0].split("-");
+                        if (hours.length == 1) {
+                            if (hours[0] === "") {
+                                start = "0";
+                                end = "0";
+                            }
+                            else {
+                                start = hours[0];
+                                end = Number(hours[0])+1;
+                            }
+                        } else {
+                            start = hours[0];
+                            end = Number(hours[1])+1;
+                        }
+                    } else {
+                        // 23,0 or 17-23,0-10 or 23,0-2 or 17-23,0
+                        var startparts = timeparts[0].split("-");
+                        start = startparts[0];
+
+                        var endparts = timeparts[1].split("-");
+                        if (endparts.length == 1) {
+                            end = Number(endparts[0])+1;
+                        } else {
+                            end = Number(endparts[1])+1;
+                        }
+                    }
+                    $("#WorkDaysInjector-time-interval-time-end").val(end);
+                    $("#WorkDaysInjector-time-interval-time-start").val(start);
+
+                }
+            } else {
+                $("#WorkDaysInjector-time-type-select").val("none");
+            }
+
+            $(".WorkDaysInjector-time-row").hide();
+            $("#WorkDaysInjector-time-type-select").val(repeattype);
+            $("#WorkDaysInjector-time-row-"+repeattype).show();
+
+            /* */
+
+            var eList = $('#node-input-property-container').css('min-height','120px').css('min-width','450px');
+
+            eList.editableList({
+                buttons: [
+                    {
+                        id: "node-WorkDaysInjector-test-WorkDaysInjector-button",
+                        label: node._("WorkDaysInjector.WorkDaysInjectorNow"),
+                        click: function(e) {
+                            console.log("CLIKC");
+                            doWorkDaysInjector(node);
+                        }
+                    }
+                ],
+                addItem: function(container,i,opt) {
+                    var prop = opt;
+                    if (!prop.hasOwnProperty('p')) {
+                        prop = {p:"",v:"",vt:"str"};
+                    }
+                    container.css({
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap'
+                    });
+                    var row = $('<div/>').appendTo(container);
+
+                    var propertyName = $('<input/>',{class:"node-input-prop-property-name",type:"text"})
+                        .css("width","30%")
+                        .appendTo(row)
+                        .typedInput({types:['msg']});
+
+                    $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
+                        .text('=')
+                        .appendTo(row);
+
+                    var propertyValue = $('<input/>',{class:"node-input-prop-property-value",type:"text"})
+                        .css("width","calc(70% - 30px)")
+                        .appendTo(row)
+                        .typedInput({default:prop.vt || 'str',types:['flow','global','str','num','bool','json','bin','date','jsonata','env','msg']});
+
+                    propertyName.typedInput('value',prop.p);
+                    propertyValue.typedInput('value',prop.v);
+                },
+                removable: true,
+                sortable: true
+            });
+            $('#node-WorkDaysInjector-test-WorkDaysInjector-button').css("float", "right").css("margin-right", "unset");
+
+            if (RED.nodes.subflow(node.z)) {
+                $('#node-WorkDaysInjector-test-WorkDaysInjector-button').attr("disabled",true);
+            }
+
+            if (!node.props) {
+                var payload = {
+                    p:'payload',
+                    v: node.payload ? node.payload : '',
+                    vt:payloadType ? payloadType : 'date'
+                };
+                var topic = {
+                    p:'topic',
+                    v: node.topic ? node.topic : '',
+                    vt:'str'
+                }
+                node.props = [payload,topic];
+            }
+
+            for (var i=0; i<node.props.length; i++) {
+                var prop = node.props[i];
+                var newProp = { p: prop.p, v: prop.v, vt: prop.vt };
+                if (newProp.v === undefined) {
+                    if (prop.p === 'payload') {
+                        newProp.v = node.payload ? node.payload : '';
+                        newProp.vt = payloadType ? payloadType : 'date';
+                    } else if (prop.p === 'topic' && prop.vt === "str") {
+                        newProp.v =  node.topic ? node.topic : '';
+                    }
+                }
+                if (newProp.vt === "string") {
+                    // Fix bug in pre 2.1 where an old WorkDaysInjector node might have
+                    // a migrated rule with type 'string' not 'str'
+                    newProp.vt = "str";
+                }
+                eList.editableList('addItem',newProp);
+            }
+
+            $("#WorkDaysInjector-time-type-select").trigger("change");
+            $("#WorkDaysInjector-time-interval-time-start").trigger("change");
+
+        },
+        oneditsave: function() {
+            var repeat = "";
+            var crontab = "";
+            var type = $("#WorkDaysInjector-time-type-select").val();
+            if (type == "none") {
+                // nothing
+            } else if (type == "interval") {
+                var count = $("#WorkDaysInjector-time-interval-count").val();
+                var units = $("#WorkDaysInjector-time-interval-units").val();
+                if (units == "s") {
+                    repeat = count;
+                } else {
+                    if (units == "m") {
+                        //crontab = "*/"+count+" * * * "+days;
+                        repeat = count * 60;
+                    } else if (units == "h") {
+                        //crontab = "0 */"+count+" * * "+days;
+                        repeat = count * 60 * 60;
+                    }
+                }
+            } else if (type == "interval-time") {
+                repeat = "";
+                var count = $("#WorkDaysInjector-time-interval-time-units").val();
+                var startTime = Number($("#WorkDaysInjector-time-interval-time-start").val());
+                var endTime = Number($("#WorkDaysInjector-time-interval-time-end").val());
+                var days = $('#WorkDaysInjector-time-interval-time-days input[type=checkbox]:checked').map(function(_, el) {
+                    return $(el).val()
+                }).get();
+                if (days.length == 0) {
+                    crontab = "";
+                } else {
+                    if (days.length == 7) {
+                        days="*";
+                    } else {
+                        days = days.join(",");
+                    }
+                    var timerange = "";
+                    if (endTime == 0) {
+                        timerange = startTime+"-23";
+                    } else if (startTime+1 < endTime) {
+                        timerange = startTime+"-"+(endTime-1);
+                    } else if (startTime+1 == endTime) {
+                        timerange = startTime;
+                    } else {
+                        var startpart = "";
+                        var endpart = "";
+                        if (startTime == 23) {
+                            startpart = "23";
+                        } else {
+                            startpart = startTime+"-23";
+                        }
+                        if (endTime == 1) {
+                            endpart = "0";
+                        } else {
+                            endpart = "0-"+(endTime-1);
+                        }
+                        timerange = startpart+","+endpart;
+                    }
+                    if (count === "0") {
+                        crontab = count+" "+timerange+" * * "+days;
+                    } else {
+                        crontab = "*/"+count+" "+timerange+" * * "+days;
+                    }
+                }
+            } else if (type == "time") {
+                var time = $("#WorkDaysInjector-time-time").val();
+                var days = $('#WorkDaysInjector-time-time-days  input[type=checkbox]:checked').map(function(_, el) {
+                    return $(el).val()
+                }).get();
+                if (days.length == 0) {
+                    crontab = "";
+                } else {
+                    if (days.length == 7) {
+                        days="*";
+                    } else {
+                        days = days.join(",");
+                    }
+                    var parts = time.split(":");
+                    if (parts.length === 2) {
+                        repeat = "";
+                        parts[1] = ("00" + (parseInt(parts[1]) % 60)).substr(-2);
+                        parts[0] = ("00" + (parseInt(parts[0]) % 24)).substr(-2);
+                        crontab = parts[1]+" "+parts[0]+" * * "+days;
+                    }
+                    else { crontab = ""; }
+                }
+            }
+
+            $("#node-input-repeat").val(repeat);
+            $("#node-input-crontab").val(crontab);
+
+            /* Gather the properties */
+            //var items = $("#node-input-property-container").editableList('items');
+            delete this.payloadType;
+            delete this.payload;
+            this.topic = "";
+            var result = getProps({ "payload" : "SendWorkDays" }, true);
+            this.props = result.props;
+            if(result.hasOwnProperty('payloadType')) { this.payloadType = result.payloadType; };
+            if(result.hasOwnProperty('payload')) { this.payload = result.payload; };
+            if(result.hasOwnProperty('topic')) { this.topic = result.topic; };
+        },
+        button: {
+            enabled: function() {
+                return !this.changed
+            },
+            onclick: function () {
+                console.log("SEND BTN");
+                if (this.changed) {
+                    return RED.notify(RED._("notification.warning", { message: RED._("notification.warnings.undeployedChanges") }), "warning");
+                }
+                doWorkDaysInjector(this);
+            }
+        },
+        oneditresize: resizeDialog
+    });
+})();
+</script>
+<script type="text/markdown" data-help-name="WorkDaysInjector">
+# WorkDaysInjector
+
+> node for schedulate a send message on only WorkDays, based on the standard injector of NodeRed
+
+### Dependencies
+    
+* [axios](https://github.com/axios/axios)
+    
+* [rrule](https://github.com/jkbrzt/rrule)
+    
+* [cronosjs](https://github.com/jaclarke/cronosjs)
+    
+* [luxon](https://github.com/moment/luxon)
+    
+* [lodash](https://github.com/lodash/lodash)
+    
+* [nager.date REST API](https://github.com/nager/Nager.Date)
+    
+### Configuration
+    
+- `Work Day Number`  : is the number of the working day on which to schedule the execution (e.g., enter 1 for the first working day of the period)
+    
+- `WorkDays Of`  : [`YEAR`, `MONTH`, `WEEK`, `DAY`]  Is the period of reference for shedulation
+    
+- `Nation` : is the Reference Nation for shedulation (used to manage *Holidays*)
+    
+> all other parameters are derived from the standard nodered injector node
+    
+### Outputs
+    
+1. Standard output
+
+    : `payload` (int) : current timestamp.
+       
+    : `topic` (string) :  'WorkDays'
+       
+    :`WorkDays` (boolean) : true   
+ </script>
+ 
